@@ -56,33 +56,33 @@ We hope to add search functionality for rhythms, time signatures, chord progress
 
 
 
-##What languages, frameworks, platforms, cloud services, databases, APIs, or other technologies did you use?
+## What languages, frameworks, platforms, cloud services, databases, APIs, or other technologies did you use?
 
 1. Programming Languages:
-Python: We wrote primarily in Python, which is used for parsing LilyPond notation, working with the Kuzu graph database, and other project-related tasks.
+- Python: We wrote primarily in Python, which is used for parsing LilyPond notation, working with the Kuzu graph database, and other project-related tasks.
 
 2. Frameworks:
-Flask: We used Flask to build a web interface for our project.
+- Flask: We used Flask to build a web interface for our project.
 
 3. Databases:
-Kuzu Database: We used the Kuzu graph database to store and manage musical data. Kuzu is the graph database solution that allows us to model and query our data as a graph.
+- Kuzu Database: We used the Kuzu graph database to store and manage musical data. Kuzu is the graph database solution that allows us to model and query our data as a graph.
 
 4. Web Technologies:
-HTML: We wrote HTML code for the web interface. Designed Logo, animations, and drop-down features.
+- HTML: We wrote HTML code for the web interface. Designed Logo, animations, and drop-down features.
 
 5. Cloud Environment:
-Repl.it: for writing code, collaboration, and deploying website
+- Repl.it: for writing code, collaboration, and deploying website
 
 6. Music Notation Software:
-LilyPond: LilyPond is a music engraving program we used for rendering musical notation based on user inputs. It's a text-based music notation system.
+- LilyPond: LilyPond is a music engraving program we used for rendering musical notation based on user inputs. It's a text-based music notation system.
 
 7. IDEs/Editors:
-Repl.it to write and test our Python code.
+- Repl.it to write and test our Python code.
 
 8. MusicXML:
-MusicXML format for importing and working with musical scores
+- MusicXML format for importing and working with musical scores
 
 9. Query Language:
 - We used Cypher, a highly graph-based data model, to represent the notes as nodes and the relationships between each note. This allows for more specific querying and filtering based on node and relationship types. 
-b. Cypher queries use a pattern-based approach to match and retrieve data from the graph. 
-c. We also chose Cypher for its readability as well as declarative Syntax (we specify what we want to retrieve from the database without specifying how to do it. The database engine optimizes the query execution.)
+- Cypher queries use a pattern-based approach to match and retrieve data from the graph. 
+- We also chose Cypher for its readability as well as declarative Syntax (we specify what we want to retrieve from the database without specifying how to do it. The database engine optimizes the query execution.)
