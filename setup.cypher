@@ -1,0 +1,6 @@
+CREATE NODE TABLE Song(id STRING, title STRING, composer STRING, PRIMARY KEY (id))
+CREATE NODE TABLE Part(id STRING, part_id STRING, song_id STRING, name STRING, PRIMARY KEY (id))
+CREATE REL TABLE PartOf(FROM Part TO Song)
+CREATE NODE TABLE Note(id STRING, part_id STRING, song_id STRING, time_point INT64, value INT64, PRIMARY KEY (id))
+CREATE REL TABLE NoteOf(FROM Note TO Part)
+CREATE REL TABLE NextNote(FROM Note TO Note)

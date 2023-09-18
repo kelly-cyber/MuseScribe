@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title> Musescribe</title>
+<style>
+body{
+	font-family: Verdana;
+	display: block;
+	text-align: center;
+    background-color: rgb(192, 218, 241);
+    justify-content:center;
+    position: relative;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+body {
+    font-family: Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(192, 218, 241);
+    height: 100vh;
+    margin: 0;
+}
+.paragraph {
+    text-align: center;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 30px;
+}
+
+.left {
+    text-align: left;
+    margin-left: 40px;
+    margin-right: 40px;
+
+}
+.container {
+    text-align: center;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.search-container {
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        margin-bottom: 20px;
+        font-family: Verdana;
+        font-size: 16px;
+    }
+
+    .filter-dropdown {
+        position: relative;
+        align-items: center;
+        display: flex;
+    }
+
+    input[type="text"] {
+        width: 500px;
+        height: 25px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+    }
+
+    .search-button,
+    .filter-button {
+        background-color: rgb(68, 5, 232);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-family: Verdana;
+    }
+
+
+
+
+
+
+
+.filter-button::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    border-color: #fff transparent transparent transparent;
+    margin-left: 5px;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+.filter-options {
+    display: none;
+    width: 200px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    text-align: left;
+}
+
+.filter-options label {
+    display: block;
+    padding: 5px 10px;
+    transition: background-color 0.2s
+}
+
+.filter-options label:hover {
+    background-color: #ba6df7;
+}
+
+.filter-checkbox {
+    margin-right: 5px;
+}
+
+.results {
+    text-align: left;
+}
+
+.resultsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.resultsList li {
+    margin: 5px 0;
+}
+
+@keyframes sparkle {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .cursive-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 3px; 
+            color:rgb(68, 5, 232);
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .normal-text {
+            font-size: 14px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 2px; 
+            color:black;
+            font-family: Verdana;
+        }
+
+        .sparkle-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 3px; 
+            color: #ba6df7;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .sparkle-letter {
+            display: inline-block;
+            animation: sparkle 1s ease infinite; 
+            animation-delay: calc(0.1s * var(--delay));
+        }
+
+        .collapsible {
+            background-color: #eee;
+            color:rgb(68, 5, 232);
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            font-family: Verdana;
+        }
+
+        .active, .collapsible:hover {
+            background-color:#ba6df7;
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+        .collapsible:after {
+            content: '\02795'; /*+ sign*/
+            font-size: 13px;
+            color: white;
+            float: right;
+            margin-left: 5px;
+            
+        }
+
+            .active:after {
+            content: "\2796"; /*minus sign */
+            background-color:#ccc
+        }
+
+</style>
+
+
+
+</head>
+<body>
+    
+    <div class="container">
+
+        <header>
+            <a href="index.html">
+                <img src="/static/images/logo.png" alt="Logo">
+            </a>
+        </header>
+        <main>
+            <div class="search-container">
+                <div class="filter-dropdown">
+                    <button id="filterButton" class="filter-button">Filters</button>
+                    <div class="filter-options">
+                        <!--These are where the filtering options are-->
+                        <label><input type="checkbox" class="filter-checkbox" value="classical"> Classical</label>
+                        <label><input type="checkbox" class="filter-checkbox" value="rock"> Rock</label>
+                        <label><input type="checkbox" class="filter-checkbox" value="jazz"> Jazz</label>
+                    </div>
+                </div>
+                <input type="text" id="searchInput" placeholder="Input notes here :)" font-size="16px" font-family="Verdana">
+                <button id="searchButton" class="search-button">Search</button>
+            </div>
+            
+            
+
+
+            
+        
+        </main>
+        <div class = "normal-text">
+            Where
+        </div>
+        <div class = "cursive-text">
+            <span>M</span>
+            <span>e</span>
+            <span>l</span>
+            <span>o</span>
+            <span>d</span>
+            <span>i</span>
+            <span>e</span>
+            <span>s</span>
+
+        </div>
+        
+        <div class = "normal-text">
+            Meet
+        </div>
+        <div class="sparkle-text">
+            <span class="sparkle-letter" style="--delay: 1;">I</span>
+            <span class="sparkle-letter" style="--delay: 3;">m</span>
+            <span class="sparkle-letter" style="--delay: 7;">a</span>
+            <span class="sparkle-letter" style="--delay: 9;">g</span>
+            <span class="sparkle-letter" style="--delay: 5;">i</span>
+            <span class="sparkle-letter" style="--delay: 10;">n</span>
+            <span class="sparkle-letter" style="--delay: 7;">a</span>
+            <span class="sparkle-letter" style="--delay: 2;">t</span>
+            <span class="sparkle-letter" style="--delay: 4;">i</span>
+            <span class="sparkle-letter" style="--delay: 6;">o</span>
+            <span class="sparkle-letter" style="--delay: 8;">n</span>
+        </div>
+
+        <div class="results">
+                <ul id="resultsList">
+                    <!--Results?? Idk how this part works-->
+                </ul>
+        </div>
+
+        <div class = "paragraph">
+            <p>Ever had a snippet of a captivating melody playing in your head, yet struggled to translate it into a meaningful online search? With no lyrics, what do you even type into Google? Struggle no more. With Musescribe, your musical ideas and inspirations are just a few clicks away. Musescribe is the cutting-edge sheet music search engine that allows you to find full-length sheet music for anything, from classical music to renditions of pop hits, with just a few notes from the melody.</p>
+
+        
+        <button type="button" class="collapsible">How do you use Musescribe?</button>
+            <div class="content">
+            <p text-align="left">Simply enter your desired search into the above search bar in order to find corresponding sheet music with your inputted notes!</p>
+            </div>
+        <button type="button" class="collapsible">What format do I input notes into the search bar?</button>
+            <div class="content">
+            <p text-align=""left>We follow the same syntax as Lilypond, a text based music engraver. To see details about how notes should be inputted, go to the following <a href="https://lilypond.org/doc/v2.24/Documentation/notation/cheat-sheet" target="_blank">site.</a> An example of an input is "a fis b" which is understood as the notes A, F#, and B in terms of relative C. We currently support melodic (note) inputs only.</p>
+            </div>
+        <button type="button" class="collapsible">How do I use filters to search for specific genres of music?</button>
+            <div class="content">
+            <p text-align=""left>
+                Simply go to the left of the search bar and click the drop-down menu to find options to filter your search with.
+            </p>
+            </div>
+
+    </div>
+
+    
+
+
+</body>
+
+<script>
+
+console.log('a')
+    
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+console.log('b')
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+console.log('c')
+    
+const filterButton = document.getElementById("filterButton");
+const searchButton = document.getElementById("searchButton");
+const filterOptions = document.querySelector(".filter-options");
+const checkboxes = document.querySelectorAll(".filter-checkbox");
+const searchInput = document.getElementById("searchInput");
+const resultsList = document.getElementById("resultsList");
+
+console.log(searchButton)
+    
+const music = [
+    { name: "Classical", category: "Music" },
+];
+
+filterButton.addEventListener("click", () => {
+    filterOptions.style.display =
+        filterOptions.style.display === "block" ? "none" : "block";
+});
+
+searchInput.addEventListener("input", updateResults);
+checkboxes.forEach((checkbox) =>
+    checkbox.addEventListener("change", updateResults)
+);
+
+    
+searchButton.addEventListener('click', updateResults)
+console.log('aaaaaaaaaaaaa')
+
+async function updateResults() {
+    const searchText = searchInput.value.toLowerCase();
+    console.log(searchText)
+    // const selectedFilters = Array.from(checkboxes)
+    //     .filter((checkbox) => checkbox.checked)
+    //     .map((checkbox) => checkbox.value.toLowerCase());
+
+    // const filteredMusic = musics.filter((music) => {
+    //     const nameMatches = music.name.toLowerCase().includes(searchText);
+    //     const categoryMatches =
+    //         selectedFilters.length === 0 ||
+    //         selectedFilters.includes(music.name.toLowerCase());
+
+    //     return nameMatches && categoryMatches;
+    // });
+
+    const res = await fetch(
+        '/search',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({query: searchText})
+        }
+    )
+
+    displayResults(await res.json());
+}
+function displayResults(filteredResults) {
+    resultsList.innerHTML = "";
+
+    if (filteredResults.length === 0) {
+        resultsList.innerHTML = "<li>No results found :((</li>";
+    } else {
+        resultsList.innerHTML = "<h1>Results</h1>";
+        filteredResults.slice(0, 10).forEach((result) => {
+            const li = document.createElement("li");
+            li.textContent = `"${result['s.title']}" (${result['s.id']}) by ${result['s.composer'] || '<no given composer>'} in part ${result['p.name']} @ ${result['n1.time_point']}`;
+            resultsList.appendChild(li);
+        });
+    }
+}
+
+</script>
+
+
+
+</html>
